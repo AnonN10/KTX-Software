@@ -216,6 +216,13 @@ ktxTexture_VkUploadEx(ktxTexture* This, ktxVulkanDeviceInfo* vdi,
                       VkImageUsageFlags usageFlags,
                       VkImageLayout finalLayout);
 KTX_API KTX_error_code KTX_APIENTRY
+ktxTexture_VkUploadEx2(ktxTexture* This, ktxVulkanDeviceInfo* vdi,
+                      ktxVulkanTexture* vkTexture,
+                      VkImageTiling tiling,
+                      VkImageCreateFlags createFlags,
+                      VkImageUsageFlags usageFlags,
+                      VkImageLayout finalLayout);
+KTX_API KTX_error_code KTX_APIENTRY
 ktxTexture_VkUpload(ktxTexture* texture, ktxVulkanDeviceInfo* vdi,
                     ktxVulkanTexture *vkTexture);
 KTX_API KTX_error_code KTX_APIENTRY
@@ -225,12 +232,26 @@ ktxTexture1_VkUploadEx(ktxTexture1* This, ktxVulkanDeviceInfo* vdi,
                        VkImageUsageFlags usageFlags,
                        VkImageLayout finalLayout);
 KTX_API KTX_error_code KTX_APIENTRY
+ktxTexture1_VkUploadEx2(ktxTexture1* This, ktxVulkanDeviceInfo* vdi,
+                       ktxVulkanTexture* vkTexture,
+                       VkImageTiling tiling,
+                       VkImageCreateFlags createFlags,
+                       VkImageUsageFlags usageFlags,
+                       VkImageLayout finalLayout);
+KTX_API KTX_error_code KTX_APIENTRY
 ktxTexture1_VkUpload(ktxTexture1* texture, ktxVulkanDeviceInfo* vdi,
                     ktxVulkanTexture *vkTexture);
 KTX_API KTX_error_code KTX_APIENTRY
 ktxTexture2_VkUploadEx(ktxTexture2* This, ktxVulkanDeviceInfo* vdi,
                        ktxVulkanTexture* vkTexture,
                        VkImageTiling tiling,
+                       VkImageUsageFlags usageFlags,
+                       VkImageLayout finalLayout);
+KTX_API KTX_error_code KTX_APIENTRY
+ktxTexture2_VkUploadEx2(ktxTexture2* This, ktxVulkanDeviceInfo* vdi,
+                       ktxVulkanTexture* vkTexture,
+                       VkImageTiling tiling,
+                       VkImageCreateFlags createFlags,
                        VkImageUsageFlags usageFlags,
                        VkImageLayout finalLayout);
 KTX_API KTX_error_code KTX_APIENTRY

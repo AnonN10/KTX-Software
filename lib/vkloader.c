@@ -789,12 +789,31 @@ ktxTexture_VkUploadEx(ktxTexture* This, ktxVulkanDeviceInfo* vdi,
                       VkImageUsageFlags usageFlags,
                       VkImageLayout finalLayout)
 {
+    return ktxTexture_VkUploadEx2(
+        This,
+        vdi,
+        vkTexture,
+        tiling,
+        0,
+        usageFlags,
+        finalLayout
+    );
+}
+
+//Don't care enough to write docs, the only difference is create flags being exposed.
+KTX_error_code
+ktxTexture_VkUploadEx2(ktxTexture* This, ktxVulkanDeviceInfo* vdi,
+                      ktxVulkanTexture* vkTexture,
+                      VkImageTiling tiling,
+                      VkImageCreateFlags createFlags,
+                      VkImageUsageFlags usageFlags,
+                      VkImageLayout finalLayout)
+{
     KTX_error_code           kResult;
     VkFilter                 blitFilter = VK_FILTER_LINEAR;
     VkFormat                 vkFormat;
     VkImageType              imageType;
     VkImageViewType          viewType;
-    VkImageCreateFlags       createFlags = 0;
     VkImageFormatProperties  imageFormatProperties;
     VkResult                 vResult;
     VkCommandBufferBeginInfo cmdBufBeginInfo = {
@@ -831,7 +850,7 @@ ktxTexture_VkUploadEx(ktxTexture* This, ktxVulkanDeviceInfo* vdi,
     numImageLayers = This->numLayers;
     if (This->isCubemap) {
         numImageLayers *= 6;
-        createFlags = VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT;
+        createFlags |= VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT;
     }
 
     assert(This->numDimensions >= 1 && This->numDimensions <= 3);
@@ -1378,6 +1397,18 @@ ktxTexture1_VkUploadEx(ktxTexture1* This, ktxVulkanDeviceInfo* vdi,
                                  tiling, usageFlags, finalLayout);
 }
 
+KTX_error_code
+ktxTexture1_VkUploadEx2(ktxTexture1* This, ktxVulkanDeviceInfo* vdi,
+                       ktxVulkanTexture* vkTexture,
+                       VkImageTiling tiling,
+                       VkImageCreateFlags createFlags,
+                       VkImageUsageFlags usageFlags,
+                       VkImageLayout finalLayout)
+{
+    return ktxTexture_VkUploadEx2(ktxTexture(This), vdi, vkTexture,
+                                 tiling, createFlags, usageFlags, finalLayout);
+}
+
 /** @memberof ktxTexture1
  * @~English
  * @brief Create a Vulkan image object from a ktxTexture1 object.
@@ -1416,6 +1447,18 @@ ktxTexture2_VkUploadEx(ktxTexture2* This, ktxVulkanDeviceInfo* vdi,
 {
     return ktxTexture_VkUploadEx(ktxTexture(This), vdi, vkTexture,
                                  tiling, usageFlags, finalLayout);
+}
+
+KTX_error_code
+ktxTexture2_VkUploadEx2(ktxTexture2* This, ktxVulkanDeviceInfo* vdi,
+                       ktxVulkanTexture* vkTexture,
+                       VkImageTiling tiling,
+                       VkImageCreateFlags createFlags,
+                       VkImageUsageFlags usageFlags,
+                       VkImageLayout finalLayout)
+{
+    return ktxTexture_VkUploadEx2(ktxTexture(This), vdi, vkTexture,
+                                 tiling, createFlags, usageFlags, finalLayout);
 }
 
 /** @memberof ktxTexture2
